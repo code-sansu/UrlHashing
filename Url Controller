@@ -1,0 +1,29 @@
+package com.sanskar.hashurl.Controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.sanskar.hashurl.service.UrlService;
+
+@RestController
+@RequestMapping("/api/urls")
+public class UrlController {
+   
+	@Autowired
+	private UrlService urlService;
+	
+	@PostMapping("/hash")
+    public String hashUrl(@RequestParam String originalUrl) {
+        return urlService.hashUrl(originalUrl);
+    }
+	
+	@GetMapping("/original")
+    public String getOriginalUrl(@RequestParam String hash) {
+        return urlService.getOriginalUrl(hash);
+    }
+	
+}
