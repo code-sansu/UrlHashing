@@ -1,0 +1,33 @@
+package com.sanskar.hashurl.service;
+
+import java.util.Base64;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.sanskar.hashurl.entity.UrlHash;
+import com.sanskar.hashurl.repository.UrlRepository;
+
+@Service 
+public class UrlService {
+    
+	@Autowired
+	private UrlRepository urlRepository;
+	
+	public String hashUrl(String originalUrl) {
+        String hash = Base64.getUrlEncoder().encodeToString(UUID.randomUUID().toString().getBytes());
+        UrlHash urlHash = new UrlHash();
+        urlHash.setOriginalUrl(originalUrl);
+        urlHash.setHash(hash);
+        urlRepository.save(urlHash);
+        return hash;
+    }
+	
+	public String getOriginalUrl(String hash) {
+        UrlHash urlHash = urlRepository.findByHash(hash);
+        return (urlHash != null) ? urlHash.getOriginalUrl() : null;
+    }
+
+}
+
