@@ -1,0 +1,13 @@
+package com.sanskar.hashurl;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class UrlHashSystemApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(UrlHashSystemApplication.class, args);
+	}
+
+}
